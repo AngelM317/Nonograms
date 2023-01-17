@@ -20,8 +20,15 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StringFunctions.h">
+    <ClInclude Include="headers\StringFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Users.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="files\Accounts.txt" />
+    <Text Include="files\AccountsCount.txt" />
   </ItemGroup>
 </Project>
