@@ -26,6 +26,9 @@
     <ClInclude Include="headers\Users.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="files\Accounts.txt" />
