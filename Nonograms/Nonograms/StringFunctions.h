@@ -49,7 +49,7 @@ void nullStr(char str[])
 
 void coppyStr(char str[], char coppy[])
 {
-	int strLength = strLength;
+	int strLength = Length(str);
 	if (sizeof(str)>sizeof(coppy))
 	{
 		for (int i = 0; i <= strLength; i++)
