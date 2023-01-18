@@ -86,7 +86,7 @@ int stringToInt(const char str[])
  * @param {string} Second string in the concatanation.
  * @param {string} The result.
  */
-bool ConcatanateString(char str1[], char str2[], char result[])
+bool ConcatanateString(const char str1[], const char str2[], char result[])
 {		
 	int index = 0;
 	while (str1[index] != 0)

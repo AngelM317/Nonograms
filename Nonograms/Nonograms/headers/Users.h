@@ -1,8 +1,8 @@
 #pragma once
 #include<fstream>
 #include<iostream>
-#include "StringFunctions.h"
-#include "Constants.h";
+#include"StringFunctions.h"
+#include"ConstantsAndStatics.h";
 
 int getAccountsCount()
 {
