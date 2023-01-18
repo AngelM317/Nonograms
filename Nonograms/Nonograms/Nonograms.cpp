@@ -6,6 +6,7 @@
 #include "headers/GameTools.h"
 int main()
 {
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

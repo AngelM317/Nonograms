@@ -103,3 +103,13 @@ bool ConcatanateString(const char str1[], const char str2[], char result[])
 	return true;
 	
 }
+void appendTxt(char str[])
+{
+	int length = Length(str);
+	str[length] = '.';
+	str[length + 1] = 't';
+	str[length + 2] = 'x';
+	str[length + 3] = 't';
+	str[length + 4] = 0;
+
+}

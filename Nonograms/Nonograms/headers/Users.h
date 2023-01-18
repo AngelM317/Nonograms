@@ -2,7 +2,7 @@
 #include<fstream>
 #include<iostream>
 #include"StringFunctions.h"
-#include"ConstantsAndStatics.h";
+#include"ConstantsAndGlobals.h";
 
 int getAccountsCount()
 {
@@ -147,8 +147,6 @@ void Register(const char username[], char const password[])
 	}
 	
 }
-
-
 bool Login(const char logUsername[], const char logPassword[], char user[])
 {
 	int accountsCount = getAccountsCount();

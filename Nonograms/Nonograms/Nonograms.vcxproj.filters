@@ -26,7 +26,7 @@
     <ClInclude Include="headers\Users.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\ConstantsAndStatics.h">
+    <ClInclude Include="headers\ConstantsAndGlobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\GameTools.h">
