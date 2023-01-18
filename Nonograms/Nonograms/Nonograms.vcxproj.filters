@@ -26,6 +26,12 @@
     <ClInclude Include="headers\Users.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\ConstantsAndGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\GameTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="files\Accounts.txt" />

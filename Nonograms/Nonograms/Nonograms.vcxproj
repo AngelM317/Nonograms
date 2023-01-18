@@ -130,6 +130,8 @@
     <ClCompile Include="Nonograms.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\ConstantsAndGlobals.h" />
+    <ClInclude Include="headers\GameTools.h" />
     <ClInclude Include="headers\StringFunctions.h" />
     <ClInclude Include="headers\Users.h" />
   </ItemGroup>
