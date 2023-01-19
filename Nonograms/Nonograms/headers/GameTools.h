@@ -3,6 +3,8 @@
 #include "ConstantsAndGlobals.h"
 #include <iostream>
 #include <fstream>
+#include<stdio.h>
+bool GameOver();
 bool isValidLevel(char level[])
 {
 	for (int i = 0; i < 10; i++)
@@ -152,48 +154,136 @@ void Save()
 	saveAttempt << drawing[size - 1];
 	saveAttempt.close();
 }
+void Exit()
+{
+	if (isLogged)
+	{
+		bool over = false;
+		if (inGame)
+		{
+			over = GameOver();
+			if (!over)
+			{
+				Save();
+			}
+		}
+		inGame = false;
+		if (!over)
+		{
+			isLogged = false;
+		}
+
+		for (int i = 0; i < rows; i++)
+		{
+			delete[] drawing[i];
+			delete[] solution[i];
+		}
+		if (!over)
+		{
+			delete[] logged;
+		}
+		delete[] drawing;
+		delete[] solution;
+		delete[] level;
+		delete[] difficulty;
+	}
+	
+}
 void Guess(int row, int col, const char guess[])
 {
 	row--;
 	col--;
 	col = colIndex + col * 3;
 	row = row + rowIndex;
-	if (isEqual(guess, "full"))
+	if (drawing[row][col] != 'o')
 	{
-		if (solution[row][col] == '*')
-		{
-			drawing[row][col] = '*';
-			if (isRowGuessed(row))
-			{
-				coppyStr(solution[row], drawing[row]);
-			}
-			if (isColumnGuessed(col))
-			{
-				for (int i = rowIndex; i < rows; i++)
-				{
-					drawing[i][col] = solution[i][col];
-				}
-			}
-		}
-		else
-		{
-			drawing[row][col] = 'x';
-			countOfLives--;
-		}
+		std::cout << MESSAGE_CELL_GUESSED << std::endl;
 	}
 	else
 	{
-		if (solution[row][col] == 'x')
+		if (isEqual(guess, "full"))
 		{
-			drawing[row][col] = 'x';
+			if (solution[row][col] == '*')
+			{
+				drawing[row][col] = '*';
+				if (isRowGuessed(row))
+				{
+					coppyStr(solution[row], drawing[row]);
+				}
+				if (isColumnGuessed(col))
+				{
+					for (int i = rowIndex; i < rows; i++)
+					{
+						drawing[i][col] = solution[i][col];
+					}
+				}
+			}
+			else
+			{
+				drawing[row][col] = 'x';
+				countOfLives--;
+			}
 		}
 		else
 		{
-			drawing[row][col] = '*';
-			countOfLives--;
+			if (solution[row][col] == 'x')
+			{
+				drawing[row][col] = 'x';
+			}
+			else
+			{
+				drawing[row][col] = '*';
+				countOfLives--;
+			}
 		}
+		Draw();
 	}
-	Draw();
+
+	if (GameOver())
+	{
+
+
+		
+		if (countOfLives == 0)
+		{
+
+			system("cls");
+			std::cout << GAME_OVER_LOST << std::endl;
+		}
+		else
+		{
+			char dir[MAX_DIR_SIZE];
+			ConcatanateString(DIR_AVAILABLE_LEVELS, logged, dir);
+			appendTxt(dir);
+			std::ofstream availableLevels;
+			availableLevels.open(dir, std::ios_base::app);
+			int j = 0;
+			while (j < 10)
+			{
+				if (!Contains(ListOfAvailableLevels, LIST_OF_LEVELS[j]))
+				{
+					if (isEqual(LIST_OF_LEVELS[j - 1], level))
+					{
+						availableLevels << LIST_OF_LEVELS[j] << " ";
+					}
+					break;
+				}
+				j++;
+			}
+			availableLevels.close();
+			delete[] ListOfAvailableLevels;
+			LoadListOfAvailableLevels();
+			system("cls");
+			std::cout << MESSAGE_GAME_WON << std::endl;
+		}
+		char dir[MAX_DIR_SIZE];
+		ConcatanateString(DIR_LAST_ATTEPMTS, logged, dir);
+		appendTxt(dir);
+		std::remove(dir);
+		Exit();
+	}
+	
+	
 }
 void LoadAttepmt()
 {
@@ -204,57 +294,64 @@ void LoadAttepmt()
 	appendTxt(dir);
 	std::fstream game;
 	game.open(dir);
-	game.getline(num, 3);
-	colIndex = stringToInt(num);
-	game.getline(num, 3);
-	rowIndex = stringToInt(num);
-	difficulty = new char[12];
-	game.getline(difficulty, 12);
-	level = new char[13];
-	game.getline(level, 13);
-	game.getline(num, 3);
-	countOfLives = stringToInt(num);
-	setSize();
-	setMatrixes();
-	int i = 0;
-	while (game.good())
-	{		
-		game.getline(drawing[i], columns + 1);
-		i++;		
-	}
-	game.close();
-	ConcatanateString(DIR_SOLUTION, level, solutionDir);
-	appendTxt(solutionDir);
-	i = 0;
-	std::fstream solFile;
-	solFile.open(solutionDir);
-	while (solFile.good())
+	if (!game.is_open())
 	{
-		solFile.getline(solution[i], columns + 1);
-		i++;
+		std::cout << MESSAGE_NO_LAST_ATTEMPTS << std::endl;
 	}
-	solFile.close();
-	inGame = true;
-	Draw();
+	else
+	{
+		game.getline(num, 3);
+		colIndex = stringToInt(num);
+		game.getline(num, 3);
+		rowIndex = stringToInt(num);
+		difficulty = new char[12];
+		game.getline(difficulty, 12);
+		level = new char[13];
+		game.getline(level, 13);
+		game.getline(num, 3);
+		countOfLives = stringToInt(num);
+		setSize();
+		setMatrixes();
+		int i = 0;
+		while (game.good())
+		{
+			game.getline(drawing[i], columns + 1);
+			i++;
+		}
+		game.close();
+		ConcatanateString(DIR_SOLUTION, level, solutionDir);
+		appendTxt(solutionDir);
+		i = 0;
+		std::fstream solFile;
+		solFile.open(solutionDir);
+		while (solFile.good())
+		{
+			solFile.getline(solution[i], columns + 1);
+			i++;
+		}
+		solFile.close();
+		inGame = true;
+		Draw();
+	}	
 }
-void Exit()
+
+bool GameOver()
 {
-	if (inGame)
+	if (countOfLives == 0)
 	{
-		Save();
+		return true;
 	}
-	inGame = false;
-	isLogged = false;
-	for (int i = 0;i < rows; i++)
+	for (int i = rowIndex; i < rows; i++)
 	{
-		delete[] drawing[i];
-		delete[] solution[i];
+		for (int j = colIndex; j < columns; j++)
+		{
+			if (solution[i][j] != drawing[i][j])
+			{
+				return false;
+			}
+		}
 	}
-	delete[] logged;
-	delete[] drawing;
-	delete[] solution;
-	delete[] level;
-	delete[] difficulty;
+	return true;
 }
 void Close()
 {

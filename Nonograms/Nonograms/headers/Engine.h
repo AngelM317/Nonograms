@@ -21,7 +21,7 @@ int Run(char* command)
 			ExecuteComand(mainPart, listOfArguments, countOfArguments);
 		}
 		delete[] mainPart;
-		if (countOfArguments != 0)
+		if (countOfArguments > 0)
 		{
 			for (int i = 0; i < countOfArguments; i++)
 			{

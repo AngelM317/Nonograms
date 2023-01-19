@@ -1,0 +1,9 @@
+6
+2
+      2  3  4  2  2
+
+  2   o  o  o  o  o
+  3   o  o  o  o  o
+  3   o  o  o  o  o
+3 1   o  o  o  o  o
+  1   o  o  o  o  o

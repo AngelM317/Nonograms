@@ -7,7 +7,7 @@
 int getAccountsCount()
 {
 	std::fstream accountsCount;
-	accountsCount.open("files/AccountsCount.txt");
+	accountsCount.open(DIR_ACCOUNTS_COUNT);
 	char count[10];
 	accountsCount.getline(count, 10);
 	accountsCount.close();
@@ -18,7 +18,7 @@ void getAllAccounts(char** result)
 {
 	int index = 0;
 	std::fstream accounts;
-	accounts.open("files/Accounts.txt");
+	accounts.open(DIR_ACCOUNTS);
 	while (accounts.good())
 	{
 		char username[13];
@@ -128,25 +128,46 @@ bool validatePaswword(const char password[])
 	}
 	return true;
 }
+void LoadListOfAvailableLevels()
+{
+	ListOfAvailableLevels = new char[90];
+	std::fstream listOflevels;
+	char dir[MAX_DIR_SIZE];
+	ConcatanateString(DIR_AVAILABLE_LEVELS, logged,dir);
+	appendTxt(dir);
+	listOflevels.open(dir);
+	listOflevels.getline(ListOfAvailableLevels, 90);
+	listOflevels.close();
+
+}
 void Register(const char username[], char const password[])
 {
 	if (validateUsername(username) && validatePaswword(password))
 	{
 		std::ofstream accounts;
-			accounts.open("files/Accounts.txt", std::ios_base::app);
-			accounts << username<< "\n";
-			accounts << password << "\n";
-			accounts.close();
-			std::cout << "User: " << username << " registrated successfully" << std::endl;
-			logged = new char[Length(username) + 1];
-			coppyStr(username, logged);
-			isLogged = true;
-			std::cout << "Welcome: " << username<<std::endl;
-			int accountCount = getAccountsCount();
-		std::ofstream CountOfAccounts;
-		CountOfAccounts.open("files/AccountsCount.txt");
-		CountOfAccounts << accountCount + 1;
-		CountOfAccounts.close();
+		accounts.open(DIR_ACCOUNTS, std::ios_base::app);
+		accounts << username<< "\n";
+		accounts << password << "\n";
+		accounts.close();
+		std::cout << "User: " << username << " registrated successfully" << std::endl;
+		logged = new char[Length(username) + 1];
+		coppyStr(username, logged);
+		isLogged = true;
+		std::cout << "Welcome: " << username<<std::endl;
+		int accountCount = getAccountsCount();
+		std::ofstream countOfAccounts;
+		countOfAccounts.open(DIR_ACCOUNTS_COUNT);
+		countOfAccounts << accountCount + 1;
+		countOfAccounts.close();
+		std::ofstream availableLevels;
+		char dir[MAX_DIR_SIZE];
+		ConcatanateString(DIR_AVAILABLE_LEVELS,logged,dir);
+		appendTxt(dir);
+		availableLevels.open(dir, std::ios_base::app);
+		availableLevels << LIST_OF_LEVELS[0] << " ";
+		availableLevels.close();
+		LoadListOfAvailableLevels();
+		
 
 	}
 	
@@ -171,6 +192,7 @@ bool Login(const char logUsername[], const char logPassword[])
 			logged = new char[Length(username) + 1];
 			coppyStr(logUsername, logged);
 			isLogged = true;
+			LoadListOfAvailableLevels();
 			std::cout << "Login successfully. Welcome: " << username << std::endl;
 			for (int i = 0; i < accountsCount; i++)
 			{
