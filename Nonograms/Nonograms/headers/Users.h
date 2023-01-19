@@ -167,8 +167,6 @@ void Register(const char username[], char const password[])
 		availableLevels << LIST_OF_LEVELS[0] << " ";
 		availableLevels.close();
 		LoadListOfAvailableLevels();
-		
-
 	}
 	
 }

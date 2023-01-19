@@ -2,6 +2,9 @@
 #include "Users.h"
 #include "GameTools.h";
 #include <iostream>
+/*
+* Prints all commands with dicription
+*/
 void Help()
 {
 	if (isLogged)
@@ -29,6 +32,10 @@ void Help()
 		}
 	}
 }
+/*
+Splits command in two parts: command and list of arguments;
+returns countOfArguments
+*/
 int SplitComand(char *comand,char* &mainPart, char** &listOfArguments)
 {
 	if (comand[0] != '/')
@@ -100,11 +107,11 @@ int SplitComand(char *comand,char* &mainPart, char** &listOfArguments)
 		{
 			return  coutOfArguments;
 		}
-		
-		
-
 	}
 }
+/*
+Handles command execution. A custom switch
+*/
 void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 {
 	if (isEqual(comand, "/close") && countOfArguments == 0)

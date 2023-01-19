@@ -240,10 +240,7 @@ void Guess(int row, int col, const char guess[])
 	}
 
 	if (GameOver())
-	{
-
-
-		
+	{	
 		if (countOfLives == 0)
 		{
 
@@ -257,7 +254,7 @@ void Guess(int row, int col, const char guess[])
 			appendTxt(dir);
 			std::ofstream availableLevels;
 			availableLevels.open(dir, std::ios_base::app);
-			int j = 0;
+			int j = 1;
 			while (j < 10)
 			{
 				if (!Contains(ListOfAvailableLevels, LIST_OF_LEVELS[j]))
@@ -281,9 +278,7 @@ void Guess(int row, int col, const char guess[])
 		appendTxt(dir);
 		std::remove(dir);
 		Exit();
-	}
-	
-	
+	}	
 }
 void LoadAttepmt()
 {

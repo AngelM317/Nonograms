@@ -100,9 +100,9 @@ bool ConcatanateString(const char str1[], const char str2[], char result[])
 		result[index + index2] = str2[index2++];
 	}
 	result[index + index2] = 0;
-	return true;
-	
+	return true;	
 }
+//appends .txt to string
 void appendTxt(char str[])
 {
 	int length = Length(str);
@@ -111,7 +111,6 @@ void appendTxt(char str[])
 	str[length + 2] = 'x';
 	str[length + 3] = 't';
 	str[length + 4] = 0;
-
 }
 bool isInt(char str[])
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include"Commands.h"
+//Handles commands
 int Run(char* command)
 {
 	char* mainPart;
@@ -34,5 +35,17 @@ int Run(char* command)
 }
 void Start()
 {
-
+	std::cout << MESSAGE_WELCOME << std::endl;
+	std::cout << std::endl;
+	std::cout << RULES << std::endl;
+	while (1)
+	{
+		char* comand = new char[MAX_INPUT_SIZE];
+		std::cin.getline(comand, 100);
+		if (Run(comand) == -1)
+		{
+			break;
+		}
+	}
+	std::cout << MESSAGE_GOODBYE;
 }

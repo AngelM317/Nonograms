@@ -5,19 +5,7 @@
 #include "headers/Engine.h"
 int main()
 {
-	std::cout << MESSAGE_WELCOME<<std::endl;
-	while (1)
-	{
-		char* comand= new char[101];
-		std::cin.getline(comand, 100);
-		if (Run(comand) == -1)
-		{
-			break;
-		}
-	}
-	std::cout << MESSAGE_GOODBYE;
-
-
+	Start();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
