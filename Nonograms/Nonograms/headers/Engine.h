@@ -6,7 +6,7 @@ int Run(char* command)
 	char* mainPart;
 	char** listOfArguments;
 	int countOfArguments = 0;
-	if (command[0] == 0)
+	if (command[0] != '/')
 	{
 		std::cout << MESSAGE_INVALID_COMAND << std::endl;
 	}
