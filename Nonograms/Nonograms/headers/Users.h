@@ -68,7 +68,7 @@ bool validateUsername(const char username[])
 	}
 	if (usernameLength > MAX_USERNAME_SIZE)
 	{
-		std::cout << "Username is too short. Maximum symbols: 12\n";
+		std::cout << "Username is too long. Maximum symbols: 12\n";
 		return false;
 	}
 	if (Contains(username, (char*)"/") || Contains(username, (char*)"#") || Contains(username, (char*)"$"))
@@ -137,7 +137,10 @@ void Register(const char username[], char const password[])
 			accounts << username<< "\n";
 			accounts << password << "\n";
 			accounts.close();
-			std::cout << "User: " << username << " registrated successfully" << std::endl;;
+			std::cout << "User: " << username << " registrated successfully" << std::endl;
+			coppyStr(username, logged);
+			isLogged = true;
+			std::cout << "Welcome: " << username;
 			int accountCount = getAccountsCount();
 		std::ofstream CountOfAccounts;
 		CountOfAccounts.open("files/AccountsCount.txt");
@@ -147,7 +150,7 @@ void Register(const char username[], char const password[])
 	}
 	
 }
-bool Login(const char logUsername[], const char logPassword[], char user[])
+bool Login(const char logUsername[], const char logPassword[])
 {
 	int accountsCount = getAccountsCount();
 	char** accounts = new char* [accountsCount];
@@ -164,7 +167,8 @@ bool Login(const char logUsername[], const char logPassword[], char user[])
 		SplitAccountInfo(accounts[i], username, password);
 		if (isEqual(logUsername, username) && isEqual(logPassword, password))
 		{
-			coppyStr(logUsername, user);
+			coppyStr(logUsername, logged);
+			isLogged = true;
 			std::cout << "Login successfully. Welcome: " << username << std::endl;
 			for (int i = 0; i < accountsCount; i++)
 			{

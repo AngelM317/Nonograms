@@ -113,3 +113,23 @@ void appendTxt(char str[])
 	str[length + 4] = 0;
 
 }
+bool isInt(char str[])
+{
+	int index = 1;
+	if (Length(str) == 0)
+	{
+		return false;
+	}
+	if (str[0] == '0' && str[1] != 0)
+	{
+		return false;
+	}
+	while (str[index] != 0)
+	{
+		if (str[index] < '0' || str[index++]>'9')
+		{
+			return false;
+		}
+	}
+	return true;
+}

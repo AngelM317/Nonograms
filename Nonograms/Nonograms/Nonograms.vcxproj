@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="headers\ConstantsAndGlobals.h" />
     <ClInclude Include="headers\GameTools.h" />
+    <ClInclude Include="headers\Commands.h" />
     <ClInclude Include="headers\StringFunctions.h" />
     <ClInclude Include="headers\Users.h" />
   </ItemGroup>
