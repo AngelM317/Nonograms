@@ -154,6 +154,7 @@ void Register(const char username[], char const password[])
 		coppyStr(username, logged);
 		isLogged = true;
 		std::cout << "Welcome: " << username<<std::endl;
+		std::cout << MESSAGE_HELP << std::endl;
 		int accountCount = getAccountsCount();
 		std::ofstream countOfAccounts;
 		countOfAccounts.open(DIR_ACCOUNTS_COUNT);
@@ -192,6 +193,7 @@ bool Login(const char logUsername[], const char logPassword[])
 			isLogged = true;
 			LoadListOfAvailableLevels();
 			std::cout << "Login successfully. Welcome: " << username << std::endl;
+			std::cout << MESSAGE_HELP << std::endl;
 			for (int i = 0; i < accountsCount; i++)
 			{
 				delete[] accounts[i];

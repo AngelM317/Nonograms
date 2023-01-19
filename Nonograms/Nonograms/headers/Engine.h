@@ -38,6 +38,7 @@ void Start()
 	std::cout << MESSAGE_WELCOME << std::endl;
 	std::cout << std::endl;
 	std::cout << RULES << std::endl;
+	std::cout << MESSAGE_HELP << std::endl;
 	while (1)
 	{
 		char* comand = new char[MAX_INPUT_SIZE];

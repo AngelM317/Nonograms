@@ -327,6 +327,7 @@ void LoadAttepmt()
 		solFile.close();
 		inGame = true;
 		Draw();
+		std::cout << MESSAGE_HELP << std::endl;
 	}	
 }
 
