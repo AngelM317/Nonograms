@@ -35,6 +35,9 @@
     <ClInclude Include="headers\Commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="files\Accounts.txt" />

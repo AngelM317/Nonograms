@@ -29,7 +29,7 @@ void Help()
 		}
 	}
 }
-int SplitComand(char comand[],char* &mainPart, char** &listOfArguments)
+int SplitComand(char *comand,char* &mainPart, char** &listOfArguments)
 {
 	if (comand[0] != '/')
 	{
@@ -105,20 +105,21 @@ int SplitComand(char comand[],char* &mainPart, char** &listOfArguments)
 
 	}
 }
-void ExecuteComand(char comand[],char* listOfArguments[],int countOfArguments)
+void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 {
-	if (isEqual(comand, "/help")&& countOfArguments==0)
+	if (isEqual(comand, "/close") && countOfArguments == 0)
+	{
+		countOfArguments = -1;
+		Close();
+	}
+	else if (isEqual(comand, "/help")&& countOfArguments==0)
 	{
 		Help();
 	}
-	else
+	else if(isEqual(comand, "/login") && countOfArguments == 2)
 	{
-		std::cout << MESSAGE_INVALID_COMAND<<std::endl;
-	}
-	if (isEqual(comand, "/login") && countOfArguments == 2)
-	{
-		if (!isLogged)
-		{
+	    if (!isLogged)
+	   	{
 			Login(listOfArguments[0], listOfArguments[1]);
 		}
 		else
@@ -127,7 +128,7 @@ void ExecuteComand(char comand[],char* listOfArguments[],int countOfArguments)
 		}
 		
 	}
-	else if(isEqual(comand, "/login") && countOfArguments == 2)
+	else if(isEqual(comand, "/register") && countOfArguments == 2)
 	{
 		if (!isLogged)
 		{
@@ -176,7 +177,13 @@ void ExecuteComand(char comand[],char* listOfArguments[],int countOfArguments)
 	{
 		if (isLogged)
 		{
-			Exit();
+			if (inGame)
+			{
+				system("cls");
+				Exit();
+				std::cout << MESSAGE_SUCCESSFULL_SAVE << std::endl;
+				std::cout << MESSAGE_LOGOUT << std::endl;
+			}		
 		}
 		else
 		{
@@ -188,6 +195,9 @@ void ExecuteComand(char comand[],char* listOfArguments[],int countOfArguments)
 		if (inGame)
 		{
 			Save();
+			Draw();
+			std::cout << MESSAGE_SUCCESSFULL_SAVE << std::endl;
+
 		}
 		else
 		{
@@ -202,7 +212,16 @@ void ExecuteComand(char comand[],char* listOfArguments[],int countOfArguments)
 			{
 				if (isEqual(listOfArguments[0], LIST_OF_LEVELS[i]))
 				{
+					level = new char[Length(listOfArguments[0]) + 1];
 					coppyStr(listOfArguments[0], level);
+					for (int i = 0; i < 5; i++)
+					{
+						if (Contains(level, LIST_OF_DIFFICULTIES[i]))
+						{
+							difficulty = new char[Length(LIST_OF_DIFFICULTIES[i]) + 1];
+							coppyStr(LIST_OF_DIFFICULTIES[i], difficulty);
+						}
+					}
 					LoadNewLevel();
 					break;
 				}

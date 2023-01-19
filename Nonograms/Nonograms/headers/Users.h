@@ -138,9 +138,10 @@ void Register(const char username[], char const password[])
 			accounts << password << "\n";
 			accounts.close();
 			std::cout << "User: " << username << " registrated successfully" << std::endl;
+			logged = new char[Length(username) + 1];
 			coppyStr(username, logged);
 			isLogged = true;
-			std::cout << "Welcome: " << username;
+			std::cout << "Welcome: " << username<<std::endl;
 			int accountCount = getAccountsCount();
 		std::ofstream CountOfAccounts;
 		CountOfAccounts.open("files/AccountsCount.txt");
@@ -167,6 +168,7 @@ bool Login(const char logUsername[], const char logPassword[])
 		SplitAccountInfo(accounts[i], username, password);
 		if (isEqual(logUsername, username) && isEqual(logPassword, password))
 		{
+			logged = new char[Length(username) + 1];
 			coppyStr(logUsername, logged);
 			isLogged = true;
 			std::cout << "Login successfully. Welcome: " << username << std::endl;

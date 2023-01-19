@@ -79,6 +79,22 @@ void setSize()
 	rows = matrixSize + rowIndex;
 	columns = colIndex + 1 + 3 * (matrixSize - 1);
 }
+void Draw()
+{
+	system("cls");
+
+
+	for (int i = 0; i < rows; i++)
+	{
+		std::cout << drawing[i] << std::endl;
+	}
+	std::cout << "Lives: ";
+	for (int i = 0; i < countOfLives; i++)
+	{
+		std::cout << "# ";
+	}
+	std::cout << std::endl;
+}
 void LoadNewLevel()
 {
 	countOfLives = 3;
@@ -114,16 +130,7 @@ void LoadNewLevel()
 		i++;
 	}
 	solFile.close();
-}
-void Draw()
-{
-	system("cls");
-	
-	
-	for (int i = 0; i < rows; i++)
-	{
-		std::cout << drawing[i] << std::endl;
-	}
+	Draw();
 }
 void Save()
 {
@@ -228,6 +235,7 @@ void LoadAttepmt()
 	}
 	solFile.close();
 	inGame = true;
+	Draw();
 }
 void Exit()
 {
@@ -236,7 +244,7 @@ void Exit()
 		Save();
 	}
 	inGame = false;
-	isLogged == false;
+	isLogged = false;
 	for (int i = 0;i < rows; i++)
 	{
 		delete[] drawing[i];
@@ -247,4 +255,8 @@ void Exit()
 	delete[] solution;
 	delete[] level;
 	delete[] difficulty;
+}
+void Close()
+{
+	Exit();
 }
