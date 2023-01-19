@@ -21,11 +21,11 @@ bool Contains(const char str[],const char searched[])
 	{
 		for (int i = 0; i <= strLength - searchedLength; i++)
 		{
-			for (int j = i; j < searchedLength; j++)
+			for (int j = i; j < searchedLength+i; j++)
 			{
-				if (str[j] == searched[j])
+				if (str[j] == searched[j-i])
 				{
-					if (j==searchedLength-1)
+					if (j-i==searchedLength-1)
 					{
 						return true;
 					}					

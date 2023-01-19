@@ -155,7 +155,7 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 	{
 		if (isLogged && !inGame)
 		{
-
+			std::cout << ListOfAvailableLevels << std::endl;
 		}
 		else
 		{
@@ -166,7 +166,16 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 	{
 		if (inGame)
 		{
-			Guess(stringToInt(listOfArguments[0]), stringToInt(listOfArguments[1]), listOfArguments[2]);
+			int row = stringToInt(listOfArguments[0]);
+			int col = stringToInt(listOfArguments[1]);
+			if (row <= matrixSize && row > 0 && col <= matrixSize && col > 0)
+			{
+				Guess(row, col, listOfArguments[2]);
+			}
+			else
+			{
+				std::cout << MESSAGE_INDEX_OUT_OF_RANGE << std::endl;
+			}
 		}
 		else
 		{
@@ -204,7 +213,7 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 			std::cout << MESSAGE_NO_PERMISSION << std::endl;
 		}
 	}
-	else if (isEqual(comand, "/load") && countOfArguments == 1)
+	else if (isEqual(comand, "/play") && countOfArguments == 1)
 	{
 		if (!inGame && isLogged)
 		{
@@ -212,18 +221,25 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 			{
 				if (isEqual(listOfArguments[0], LIST_OF_LEVELS[i]))
 				{
-					level = new char[Length(listOfArguments[0]) + 1];
-					coppyStr(listOfArguments[0], level);
-					for (int i = 0; i < 5; i++)
+					if (Contains(ListOfAvailableLevels, listOfArguments[0]))
 					{
-						if (Contains(level, LIST_OF_DIFFICULTIES[i]))
+						level = new char[Length(listOfArguments[0]) + 1];
+						coppyStr(listOfArguments[0], level);
+						for (int i = 0; i < 5; i++)
 						{
-							difficulty = new char[Length(LIST_OF_DIFFICULTIES[i]) + 1];
-							coppyStr(LIST_OF_DIFFICULTIES[i], difficulty);
+							if (Contains(level, LIST_OF_DIFFICULTIES[i]))
+							{
+								difficulty = new char[Length(LIST_OF_DIFFICULTIES[i]) + 1];
+								coppyStr(LIST_OF_DIFFICULTIES[i], difficulty);
+							}
 						}
+						LoadNewLevel();
+						break;
 					}
-					LoadNewLevel();
-					break;
+					else
+					{
+						std::cout << MESSAGE_LEVEL_PERMISSION_DENIED << std::endl;
+					}
 				}
 				if (i == 9)
 				{
