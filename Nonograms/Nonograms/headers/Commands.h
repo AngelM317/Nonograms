@@ -110,6 +110,7 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 	if (isEqual(comand, "/close") && countOfArguments == 0)
 	{
 		countOfArguments = -1;
+		system("cls");
 		Close();
 	}
 	else if (isEqual(comand, "/help")&& countOfArguments==0)

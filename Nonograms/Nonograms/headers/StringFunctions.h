@@ -72,7 +72,7 @@ int stringToInt(const char str[])
 	
 	int sum = 0;
 	int length = Length(str);
-	for (int i = length - 1; i >= 0; i--)
+	for (int i = 0; i < length; i++)
 	{
 		sum *= 10;
 		sum += str[i] - '0';
