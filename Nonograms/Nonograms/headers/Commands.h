@@ -197,10 +197,14 @@ void ExecuteComand(char comand[],char* listOfArguments[],int &countOfArguments)
 			if (inGame)
 			{
 				system("cls");
-				Exit();
 				std::cout << MESSAGE_SUCCESSFULL_SAVE << std::endl;
 				std::cout << MESSAGE_LOGOUT << std::endl;
-			}		
+			}
+			else
+			{
+				std::cout << MESSAGE_LOGOUT << std::endl;
+			}
+			Exit();
 		}
 		else
 		{
