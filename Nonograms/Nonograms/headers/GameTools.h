@@ -79,9 +79,10 @@ void setSize()
 	rows = matrixSize + rowIndex;
 	columns = colIndex + 1 + 3 * (matrixSize - 1);
 }
-void generateNewLevel()
+void LoadNewLevel()
 {
 	countOfLives = 3;
+	inGame = true;
 	char dir[MAX_DIR_SIZE];
 	char solutionDir[MAX_DIR_SIZE];
 	ConcatanateString(DIR_DRAWING, level, dir);
@@ -226,15 +227,22 @@ void LoadAttepmt()
 		i++;
 	}
 	solFile.close();
+	inGame = true;
 }
 void Exit()
 {
-	Save();
+	if (inGame)
+	{
+		Save();
+	}
+	inGame = false;
+	isLogged == false;
 	for (int i = 0;i < rows; i++)
 	{
 		delete[] drawing[i];
 		delete[] solution[i];
 	}
+	delete[] logged;
 	delete[] drawing;
 	delete[] solution;
 	delete[] level;
